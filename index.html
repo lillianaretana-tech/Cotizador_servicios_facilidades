@@ -2,7 +2,7 @@
 <style>
 :root{--bg:#071426;--card:#0d213a;--card2:#102a49;--line:#284563;--text:#eef6ff;--muted:#9fb3c8;--accent:#35a7ff;--accent2:#72c7ff;--danger:#ff6b6b;--ok:#57d39b;--warn:#ffd166}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#06111f,#0a1b30);color:var(--text)}.wrap{max-width:1250px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:18px}.brand h1{margin:0;font-size:24px}.brand small{color:var(--muted)}.version{font-size:12px;color:#b9dfff;border:1px solid var(--line);padding:5px 9px;border-radius:999px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.card{background:rgba(13,33,58,.96);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 12px 35px #0003}.span12{grid-column:span 12}.span8{grid-column:span 8}.span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}.span2{grid-column:span 2}label{display:block;color:var(--muted);font-size:12px;margin:0 0 5px}input,select,textarea{width:100%;background:#08192c;border:1px solid #31506e;color:var(--text);padding:10px;border-radius:9px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--accent)}button{border:0;border-radius:9px;padding:10px 13px;background:var(--accent);color:#001526;font-weight:750;cursor:pointer}.secondary{background:#173858;color:#d9efff}.danger{background:#4b2430;color:#ffdce2}.ghost{background:transparent;border:1px solid #31506e;color:#d9efff}.row{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.section-title{font-size:16px;margin:0 0 12px}.hint{color:var(--muted);font-size:12px;line-height:1.45}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:#08192c;border:1px solid var(--line);padding:12px;border-radius:12px}.kpi b{font-size:19px;display:block;margin-top:4px}.kpi small{color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 7px;border-bottom:1px solid #233f5b;text-align:left;vertical-align:top}th{color:#9fd5ff;font-size:11px;text-transform:uppercase}.tag{display:inline-block;padding:3px 7px;border-radius:999px;background:#173858;color:#bfe5ff;font-size:11px}.source{font-size:11px;color:#8fb0cc;margin-top:5px}.review{background:#0a2843;border:1px dashed #4f9bd1;padding:12px;border-radius:10px}.notice{padding:10px 12px;border-left:3px solid var(--warn);background:#302a1b;border-radius:8px;color:#ffe7a6;font-size:12px}.ok{border-left-color:var(--ok);background:#153126;color:#bff4d9}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.tabs button.active{background:var(--accent);color:#001526}.tabs button{background:#173858;color:#d9efff}.hidden{display:none}.right{text-align:right}.money{font-variant-numeric:tabular-nums}.footer{color:#7f9bb6;font-size:11px;text-align:center;padding:18px}.check{display:flex;gap:7px;align-items:center}.check input{width:auto}@media(max-width:800px){.span8,.span6,.span4,.span3,.span2{grid-column:span 12}.kpis{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.row>*{flex:1 1 45%}table{font-size:11px}.wrap{padding:12px}}
 </style></head><body><div class="wrap">
-<div class="top"><div class="brand"><h1>LillyTech · Cotizador Facility Services</h1><small>Piloto de cargas de trabajo y apoyo a cotización SBM</small></div><div class="version">v1.8 · Rendimientos SBM + industria</div></div>
+<div class="top"><div class="brand"><h1>LillyTech · Cotizador Facility Services</h1><small>Piloto de cargas de trabajo y apoyo a cotización SBM</small></div><div class="version">v2.0 · Cleanroom calibrado</div></div>
 <div class="grid">
 <section class="card span12"><h2 class="section-title">Datos de la cotización</h2><div class="grid">
 <div class="span3"><label>Cliente</label><input id="cliente" placeholder="Ej. Uber"></div><div class="span3"><label>Proyecto / Site</label><input id="site" placeholder="Ej. Bambú"></div><div class="span3"><label>Empresa facturadora</label><select id="empresa"><option value="1">SBM Management de Costa Rica S.A. · sin IVA</option><option value="2">SBMCR S.R.L. · IVA 13%</option><option value="3">SBMCR S.R.L. · exento autorizado</option></select></div><div class="span3"><label>Estado</label><select id="estado"><option>Borrador</option><option>En revisión</option><option>Enviada</option><option>Aprobada</option><option>Rechazada</option></select></div><div class="span3"><label>Fecha cotización</label><input id="fecha" type="date"></div><div class="span3"><label>Fecha ejecución</label><input id="ejec" type="date"></div><div class="span3"><label>Fee materiales de esta cotización</label><select id="adminMateriales"><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option></select><div class="hint">Un solo fee para todos los materiales de esta cotización.</div></div><div class="span3"><div id="empresaInfo" class="notice ok">SBM Management de Costa Rica S.A. · IVA 0%</div></div>
@@ -15,7 +15,16 @@
 <div id="areaEst" class="span12 hidden"><div class="review"><b>📐 Te ayudo a estimar el área</b><div class="hint" style="margin:5px 0 10px">No necesitas saber los m². Responde lo que puedas y la app hará una estimación preliminar.</div><div class="grid"><div class="span3"><label>¿Qué espacio es?</label><select id="tipoEspacio"><option>Sala de reuniones</option><option>Lobby</option><option>Oficina</option><option>Comedor</option><option>Área abierta</option><option>Otro</option></select></div><div class="span3"><label>¿Qué tan amplio se siente?</label><select id="ajusteEspacio"><option value="0.85">Ajustado</option><option value="1" selected>Normal</option><option value="1.2">Amplio</option></select></div><div class="span3 estMeeting"><label>Personas en la mesa</label><select id="capMesa"><option value="4">4</option><option value="6">6</option><option value="8">8</option><option value="10">10</option><option value="12" selected>12</option><option value="16">16</option><option value="20">20+</option></select></div><div class="span3 estMeeting"><label>Sillas/muebles adicionales</label><input id="extrasSala" type="number" min="0" value="0"></div><div class="span3 estLobby hidden"><label>Escritorio / recepción</label><select id="tamRecepcion"><option value="1">Pequeño</option><option value="1.5" selected>Mediano</option><option value="2.2">Grande</option><option value="3">Muy grande / varios módulos</option></select></div><div class="span3 estLobby hidden"><label>Asientos para visitantes</label><input id="asientosLobby" type="number" min="0" value="0"></div><div class="span3 estWork hidden"><label>Puestos de trabajo aprox.</label><input id="puestosTrabajo" type="number" min="0" value="6"></div><div class="span3 estDining hidden"><label>Personas sentadas aprox.</label><input id="puestosComedor" type="number" min="0" value="12"></div><div class="span6"><label>¿Qué más hay?</label><input id="refEspacio" placeholder="Ej. sofá, credenza, mesa auxiliar... (opcional)"></div><div class="span12"><div id="areaEstResultado" class="notice ok">Responde las preguntas y aquí aparecerá el área estimada.</div></div></div></div><div class="notice" style="margin-top:8px">⚠️ Es una ayuda para cotización preliminar, no una medición arquitectónica. Si luego obtienes el plano o las medidas reales, puedes sustituir esta estimación.</div></div>
 <div class="span3"><label>¿Cómo calcular el tiempo?</label><select id="modoTiempo"><option value="auto">Que la app lo calcule</option><option value="manual">Ya conozco las horas</option></select></div>
 <div class="span2"><label>Personas</label><input id="cuadrilla" type="number" min="1" value="1"></div><div class="span2"><label>Horas de trabajo por persona</label><input id="horasManual" type="number" min="0" step="0.25" placeholder="Ej. 12" disabled></div><div class="span2"><label>Puesto</label><select id="puestoServicio"></select></div><div class="span2"><label>Jornada</label><select id="jornadaServicio"><option value="dia">Diurna</option><option value="mixta">Mixta</option><option value="nocturna">Nocturna</option></select></div><div class="span2"><label>Tipo de hora</label><select id="tipoHoraServicio"><option value="ord">Ordinaria</option><option value="extra">Extra 1.5</option><option value="doble">Doble</option></select></div><div class="span2"><label>Método / nota</label><input id="metodo" placeholder="Ej. extracción"></div>
-<div class="span12"><details><summary style="cursor:pointer;color:#9fd5ff">Opciones avanzadas de tiempo</summary><div class="grid" style="margin-top:10px"><div class="span3"><label>Rendimiento sugerido (solo referencia)</label><input id="rendimiento" type="number" min="0.01" step="0.01"></div><div class="span3"><label>Preparación + cierre (h)</label><input id="tiempoFijo" type="number" min="0" step="0.25" value="0"><div class="hint">Montaje, producto, mobiliario, bordes y recogida. Supuesto provisional editable.</div></div><div class="span3"><label>Duración mínima operativa (h)</label><input id="minhoras" type="number" min="0" step="0.25" value="0"><div class="hint">Evita que un trabajo pequeño se cotice como si solo existiera el paso de máquina.</div></div></div></details></div><div class="span12"><div id="previewServicio" class="notice ok">Selecciona el servicio y la app te guiará.</div></div><div class="span12"><div class="row"><button id="addServicio">+ Agregar y calcular cotización</button><button id="limpiarServicio" class="ghost" type="button">🧹 Limpiar servicio</button></div></div>
+<div class="span12">
+<div class="span12" style="margin-top:8px">
+  <label style="display:flex;align-items:center;gap:8px"><input id="usarCuadrillaMixta" type="checkbox" style="width:auto"> Usar cuadrilla mixta (puestos, jornadas o tipos de hora diferentes)</label>
+  <div id="cuadrillaMixtaBox" style="display:none;margin-top:8px" class="notice">
+    <div class="hint" style="margin-bottom:8px">Agrega cada grupo de la cuadrilla por separado. La app sumará sus horas-persona y costo de mano de obra.</div>
+    <div id="cuadrillaMixtaRows"></div>
+    <button type="button" class="secondary" id="addMixta">+ Agregar grupo</button>
+  </div>
+</div>
+<details><summary style="cursor:pointer;color:#9fd5ff">Opciones avanzadas de tiempo</summary><div class="grid" style="margin-top:10px"><div class="span3"><label>Rendimiento sugerido (solo referencia)</label><input id="rendimiento" type="number" min="0.01" step="0.01"></div><div class="span3"><label>Preparación + cierre (h)</label><input id="tiempoFijo" type="number" min="0" step="0.25" value="0"><div class="hint">Montaje, producto, mobiliario, bordes y recogida. Supuesto provisional editable.</div></div><div class="span3"><label>Duración mínima operativa (h)</label><input id="minhoras" type="number" min="0" step="0.25" value="0"><div class="hint">Evita que un trabajo pequeño se cotice como si solo existiera el paso de máquina.</div></div></div></details></div><div class="span12"><div id="previewServicio" class="notice ok">Selecciona el servicio y la app te guiará.</div></div><div class="span12"><div class="row"><button id="addServicio">+ Agregar y calcular cotización</button><button id="limpiarServicio" class="ghost" type="button">🧹 Limpiar servicio</button></div></div>
 </div><p class="hint">Si conoces las horas, indícalas y la app calcula el costo de inmediato. Si no las conoces, usa “Que la app lo calcule”; cuando exista un estándar validado lo propondrá automáticamente y, si todavía falta ese dato, te dirá exactamente qué necesitamos.</p>
 <div style="overflow:auto"><table><thead><tr><th>Servicio</th><th>Cantidad</th><th>Tiempo</th><th>Personas</th><th>Horas-persona</th><th>Tipo</th><th>Costo MO</th><th>Nota</th><th></th></tr></thead><tbody id="tablaServicios"></tbody></table></div></div>
 <div id="mano" class="tabpane hidden"><h2 class="section-title">Mano de obra adicional</h2><div class="notice ok"><b>¿Cuándo usar esto?</b> Cuando el cliente pide personas/horas sin un servicio del catálogo, o cuando necesitas sumar horas adicionales a un servicio ya calculado. Ejemplo: 2 misceláneos × 4 horas = 8 horas-persona.</div><br><div class="notice">Las tarifas base se tomaron del COM-F-04 2026 suministrado. En el piloto puedes cambiarlas en Configuración. La fecha de vigencia es configurable.</div><br><div class="grid">
@@ -59,6 +68,9 @@ note:'Recuperación/mantenimiento · proceso más ligero · Red/Blue según cond
 {name:'Protección piso resiliente/vinílico',unit:'m²',rend:0,crew:3,note:'Lavado/preparación + Clean & Shine + protector 3M + acabado'},
 {name:'Encerado tradicional',unit:'m²',rend:0,crew:2,note:'Lavado/decapado según condición + acabado Vectra/Shine según producto'},
 {name:'Lavado profundo de piso',unit:'m²',rend:75,crew:2,machineBound:true,setup:0.75,min:1.5,provisional:true,source:'Supuesto técnico provisional del piloto: 75 m² por hora-persona. NO es estándar SBM; debe sustituirse al validar tiempos reales de campo.',note:'Rotativa baja; bordes manuales'},
+{name:'Cleanroom - diaria',unit:'m²',rend:0,crew:1,setup:0,min:0,machineBound:false,provisional:true,source:'Referencia técnica de proceso; sin rendimiento SBM validado todavía. Usar tiempo manual hasta medir campo.',note:'Rutina diaria · alcance según protocolo del sitio'},
+{name:'Cleanroom - semanal',unit:'m²',rend:0,crew:2,setup:0,min:0,machineBound:false,provisional:true,source:'Referencia técnica de proceso; sin rendimiento SBM validado todavía. Usar tiempo manual hasta medir campo.',note:'Rutina semanal · alcance según protocolo del sitio'},
+{name:'Cleanroom - profunda mensual',unit:'m²',rend:6.6667,crew:5,setup:0,min:6,machineBound:false,provisional:true,cleanroomMonthly:true,source:'SBM campo · referencia inicial: ~200 m² de planta, 5 personas, 6 h de reloj = 30 horas-persona. Rendimiento equivalente 6.67 m²/HP. Validar con más trabajos reales.',note:'Profunda mensual · 200 m² ≈ 5 personas × 6 h = 30 HP'},
 {name:'Limpieza de baños',unit:'fixture',rend:20,crew:1,setup:0,min:0,machineBound:false,provisional:false,source:'Referencia industria ISSA RCL-7: 3 min por fixture para proceso agrupado de baño; usar como benchmark de cotización y calibrar con SBM.',note:'ISSA · 3 min/fixture · incluye proceso agrupado de limpieza de baño'},
 {name:'Limpieza de lobby/cafetería',unit:'m²',rend:0,crew:1,note:'Profunda / especial'},
 {name:'Persianas / cortinas',unit:'m²',rend:0,crew:1,note:'Método según material',source:'Sin benchmark público primario suficientemente específico. Mantener tiempo manual hasta medir SBM.',provisional:true},
@@ -131,6 +143,14 @@ function calcDraft(){
  let hp=0,duration=0,productiveHP=0,productiveDuration=0,setupHP=0,msg='',minimumApplied=false,stageRows=[];
  if(mode==='manual'){
    if(per<=0){msg='⚠️ Indica cuántas horas trabajará cada persona.'}else{duration=per;hp=per*crew}
+ }else if(c.cleanroomMonthly&&r>0&&q>0){
+   // Rendimiento equivalente: m² de planta por hora-persona del servicio profundo completo.
+   productiveHP=(q/r)*f;
+   productiveDuration=productiveHP/crew;
+   duration=Math.max(productiveDuration,minDuration||0);
+   hp=duration*crew;
+   setupHP=Math.max(0,hp-productiveHP);
+   stageRows=[{name:'Proceso profundo equivalente',clock:productiveDuration}];
  }else if(c.diamond3m&&r>0&&q>0){
    // Diamantado 3M: r es productividad estimada POR PASADA de una rotativa 20", no del proceso completo.
    const onePass=q/r;
@@ -192,13 +212,15 @@ function calcDraft(){
  return{c,q,r,f,minDuration,setup,crew,mode,per,hp,duration,productiveHP,productiveDuration,setupHP,minimumApplied,stageRows,msg,role,sh,t,rate,cost}
 }
 function previewService(){
- if(!$('previewServicio'))return;let d=calcDraft();$('horasManual').disabled=$('modoTiempo').value!=='manual';if(d.c.fieldCarpet && d.f>=1.30 && +$('cuadrilla').value<d.crew){$('cuadrilla').value=d.crew;}
+ if(!$('previewServicio'))return;let d=calcDraft();$('horasManual').disabled=$('modoTiempo').value!=='manual';let mx=mixedCrewCalc();if(d.c.fieldCarpet && d.f>=1.30 && +$('cuadrilla').value<d.crew){$('cuadrilla').value=d.crew;}
  if(d.msg){$('previewServicio').className='notice';$('previewServicio').innerHTML=d.msg;return}
  let tipo={ord:'Ordinaria',extra:'Extra 1.5',doble:'Doble'}[d.t],jor={dia:'Diurna',mixta:'Mixta',nocturna:'Nocturna'}[d.sh];$('previewServicio').className='notice ok';
  let src=d.c.provisional?`<div class="source">⚠️ Parámetros provisionales para revisión: ${d.c.source}</div>`:'';
  let est=$('modoArea').value==='estimada'?`<div class="source">📐 ${estimateArea().why}</div>`:'';
  let calc='';
- if(d.mode==='auto'&&d.c.staged&&d.r>0){
+ if(d.mode==='auto'&&d.c.cleanroomMonthly&&d.r>0){
+   calc=`<div style="margin-top:7px"><b>Referencia SBM de campo · profunda mensual</b><br><span class="hint">Rendimiento equivalente: ${d.r.toFixed(2)} m²/HP.<br>Referencia: 200 m² ≈ 5 personas × 6 h = 30 HP.<br><b>Duración estimada: ${hm(d.duration)} · ${d.hp.toFixed(2)} horas-persona.</b><br>El área de planta es la base equivalente; el proceso profundo puede incluir techo, paredes, piso y otras superficies según protocolo.</span></div>`;
+ }else if(d.mode==='auto'&&d.c.staged&&d.r>0){
    let rows=d.stageRows.map(x=>`<br>• ${x.name}: ${hm(x.clock)}`).join('');
    let lead=d.c.diamond3m
      ? (d.c.diamondMode==='maintenance'
@@ -212,6 +234,39 @@ function previewService(){
  let crewHint=d.c.crew?`<div class="source">👥 Cuadrilla sugerida por la app: <b>${d.c.crew} persona(s)</b>. Puedes cambiarla si el trabajo real lo requiere.</div>`:'';
  let incomplete=(d.c.name.includes('Alfombra'))?`<div class="source">🧪 <b>Costo técnico todavía incompleto:</b> este valor es solo mano de obra. Productos, consumibles, equipo/movilización y estructura comercial deben sumarse antes de considerar el precio final.</div>`:'';
  $('previewServicio').innerHTML=`✓ Área/cantidad usada: <b>${d.q.toFixed(2)} ${$('unidad').value}</b><br>Tiempo estimado: <b>${hm(d.duration)}</b> · ${d.crew} persona(s) · <b>${d.hp.toFixed(2)} horas-persona</b>${calc}<br>Mano de obra: ${d.role} · ${jor} · ${tipo} · ${money(d.rate)}/h → <b>${money(d.cost)}</b>${crewHint}${incomplete}${src}${est}`
+
+ if(mx && mx.rows.length){
+   const detail=mx.rows.map(x=>`${x.people} × ${x.puesto} · ${x.jornada} · ${x.tipo} · ${hm(x.hours)} = ${money(x.cost)}`).join('<br>');
+   $('previewServicio').insertAdjacentHTML('beforeend',`<div class="notice ok" style="margin-top:8px"><b>Cuadrilla mixta</b><br>${detail}<br><b>Total: ${mx.hp.toFixed(2)} horas-persona · ${money(mx.cost)}</b><br><span class="hint">Este desglose permite combinar puestos, jornadas y tipos de hora en la misma cotización.</span></div>`);
+ }
+}
+
+function addMixtaRow(data={}){
+ const box=$('cuadrillaMixtaRows'); if(!box)return;
+ const div=document.createElement('div'); div.className='grid mixtaRow'; div.style.marginBottom='8px';
+ const puestos=Object.keys(RATES).map(x=>`<option ${x===(data.puesto||'Misceláneos')?'selected':''}>${x}</option>`).join('');
+ div.innerHTML=`<div class="span3"><label>Personas</label><input class="mxPeople" type="number" min="1" step="1" value="${data.people||1}"></div>
+ <div class="span3"><label>Puesto</label><select class="mxPuesto">${puestos}</select></div>
+ <div class="span2"><label>Jornada</label><select class="mxJornada"><option value="dia">Diurna</option><option value="mixta">Mixta</option><option value="nocturna">Nocturna</option></select></div>
+ <div class="span2"><label>Tipo hora</label><select class="mxTipo"><option value="ord">Ordinaria</option><option value="extra">Extra 1.5</option><option value="doble">Doble</option></select></div>
+ <div class="span2"><label>Horas/persona</label><div style="display:flex;gap:6px"><input class="mxHours" type="number" min="0" step=".25" value="${data.hours||0}"><button type="button" class="danger mxDel">×</button></div></div>`;
+ box.appendChild(div);
+ div.querySelector('.mxJornada').value=data.jornada||'dia';
+ div.querySelector('.mxTipo').value=data.tipo||'ord';
+ div.querySelector('.mxDel').onclick=()=>{div.remove();previewService();};
+ div.querySelectorAll('input,select').forEach(el=>el.oninput=previewService);
+}
+function mixedCrewCalc(){
+ if(!$('usarCuadrillaMixta')?.checked)return null;
+ let hp=0,cost=0,people=0,rows=[];
+ document.querySelectorAll('.mixtaRow').forEach(r=>{
+   const p=Math.max(1,+r.querySelector('.mxPeople').value||1), h=Math.max(0,+r.querySelector('.mxHours').value||0);
+   const puesto=r.querySelector('.mxPuesto').value,j=r.querySelector('.mxJornada').value,t=r.querySelector('.mxTipo').value;
+   const rate=RATES[puesto]?.[j]?.[t]||0;
+   hp+=p*h; cost+=p*h*rate; people+=p;
+   rows.push({people:p,hours:h,puesto,jornada:j,tipo:t,rate,cost:p*h*rate});
+ });
+ return {hp,cost,people,rows};
 }
 function render(){let hs=0,serviceMO=0;$('tablaServicios').innerHTML=state.services.map((x,i)=>{hs+=x.hours;serviceMO+=x.laborCost||0;return `<tr><td>${x.name}</td><td>${x.qty} ${x.unit}</td><td>${x.duration.toFixed(2)} h</td><td>${x.crew}</td><td>${x.hours.toFixed(2)}</td><td>${x.role}<br><span class="tag">${x.type}</span></td><td>${money(x.laborCost||0)}</td><td>${x.note}</td><td><button class="danger" onclick="delS(${i})">×</button></td></tr>`}).join('');
 let extraMO=0;$('tablaMO').innerHTML=state.labor.map((x,i)=>{extraMO+=x.total;return `<tr><td>${x.role}</td><td>${x.shift}</td><td>${x.type}</td><td>${x.hours}</td><td>${money(x.rate)}</td><td>${money(x.total)}</td><td><button class="danger" onclick="delL(${i})">×</button></td></tr>`}).join('');let mo=serviceMO+extraMO,mt=0;$('tablaMat').innerHTML=state.materials.map((x,i)=>{mt+=x.total;return `<tr><td>${x.name}</td><td>${x.cat}</td><td>${x.qty}</td><td>${money(x.price)}</td><td>${money(x.total)}</td><td><button class="danger" onclick="delM(${i})">×</button></td></tr>`}).join('');
@@ -341,7 +396,7 @@ $('sbLogout').onclick=async()=>{
 $('sbSave').onclick=async()=>{
   if(!sbUser||!sb){sbSetStatus('Primero inicia sesión.','error');return;}
   const t=totalsForCloud();
-  const row={owner_id:sbUser.id,status:$('estado').value||'Borrador',client:$('cliente').value||null,site:$('site').value||null,quote_date:$('fecha').value||null,execution_date:$('ejec').value||null,currency:'CRC',payload:quotePayload(),total_labor:t.labor,total_materials:t.materials,proposed_price:t.proposed,version_label:'v1.8',updated_at:new Date().toISOString()};
+  const row={owner_id:sbUser.id,status:$('estado').value||'Borrador',client:$('cliente').value||null,site:$('site').value||null,quote_date:$('fecha').value||null,execution_date:$('ejec').value||null,currency:'CRC',payload:quotePayload(),total_labor:t.labor,total_materials:t.materials,proposed_price:t.proposed,version_label:'v2.0',updated_at:new Date().toISOString()};
   $('sbSave').disabled=true; sbSetStatus('Guardando cotización…');
   try{
     let res;
@@ -371,4 +426,13 @@ $('sbLoad').onclick=async()=>{
 if(sb) sb.auth.onAuthStateChange((_event,session)=>sbToggle(session?.user||null));
 sbInit();
 
+
+if($('usarCuadrillaMixta')){
+ $('usarCuadrillaMixta').addEventListener('change',()=>{
+   $('cuadrillaMixtaBox').style.display=$('usarCuadrillaMixta').checked?'block':'none';
+   if($('usarCuadrillaMixta').checked && !$('cuadrillaMixtaRows').children.length) addMixtaRow();
+   previewService();
+ });
+ $('addMixta').addEventListener('click',()=>addMixtaRow());
+}
 </script></body></html>
